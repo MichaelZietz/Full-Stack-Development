@@ -29,8 +29,10 @@ export class TripListingComponent implements OnInit{
     console.log('trip-listing constructor'); 
   }
 
-  public addTripIsLoggedIn() { 
-    return this.authenticationService.isLoggedIn(); 
+  // This function returns the determined user's state if they are signed in as an authenticated
+  // admin
+  public addTripIsAdminLoggedIn() { 
+    return this.authenticationService.isAdminLoggedIn(); 
   }
 
   public addTrip(): void {

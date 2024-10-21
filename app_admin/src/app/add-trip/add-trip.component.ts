@@ -21,6 +21,7 @@ export class AddTripComponent implements OnInit {
     private tripService: TripDataService
   ) { }
   
+  // the add form requires that all the following variables are present and needed to successfully add a new trip
   ngOnInit() {
     this.addForm = this.formBuilder.group({
       _id: [],
@@ -32,9 +33,12 @@ export class AddTripComponent implements OnInit {
       perPerson: ['', Validators.required],
       image: ['', Validators.required],
       description: ['', Validators.required],
+      current_availability: [0, Validators.required],
+      max_availability: [0, Validators.required]
     })
   }
   
+  // This function performs the update trip Crud POST and then navigates the user back to the main page
   public onSubmit() {
     this.submitted = true;
     if (this.addForm.valid) {

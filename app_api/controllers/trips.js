@@ -57,7 +57,9 @@ const tripsAddTrip = async (req, res) => {
         resort: req.body.resort,
         perPerson: req.body.perPerson,
         image: req.body.image,
-        description: req.body.description
+        description: req.body.description,
+        current_availability: req.body.current_availability,
+        max_availability: req.body.max_availability
     });
 
     const q = await newTrip.save();
@@ -92,7 +94,9 @@ const tripsUpdateTrip = async (req, res) => {
                 resort: req.body.resort,
                 perPerson: req.body.perPerson,
                 image: req.body.image,
-                description: req.body.description
+                description: req.body.description,
+                current_availability: req.body.current_availability,
+                max_availability: req.body.max_availability
             }
         )
         .exec();

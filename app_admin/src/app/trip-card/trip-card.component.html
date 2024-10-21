@@ -7,12 +7,18 @@
 			{{ trip.resort }}                 
 		</h6>                 
 		<p class="card-subtitle mt-3 mb-3 text-muted">  
-{{trip.length}} only {{trip.perPerson|currency:'USD':"symbol"}} per person 
+			{{trip.length}} only {{trip.perPerson|currency:'USD':"symbol"}} per person 
 		</p> 
 		<p class="card-text" [innerHTML]="trip.description"> 
 		</p> 
-		<div *ngIf="isLoggedIn()">
+		<p>
+			Seats available: {{ trip.current_availability }} / {{trip.max_availability}}
+		</p>
+		<div *ngIf="isAdminLoggedIn()">
 			<button (click)="editTrip(trip)" class="btn btn-info">Edit Trip</button>
+		</div>
+		<div *ngIf="isGuestLoggedIn()">
+			<button (click)="bookTrip(trip)" class="btn btn-info">Book Trip</button>
 		</div>
 	</div> 
 </div>

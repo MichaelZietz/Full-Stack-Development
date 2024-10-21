@@ -7,5 +7,7 @@ export interface Trip {
     resort: string, 
     perPerson: string, 
     image: string, 
-    description: string
+    description: string,
+    max_availability: Number,
+    current_availability: Number
 }
