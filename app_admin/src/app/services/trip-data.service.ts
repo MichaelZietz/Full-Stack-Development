@@ -53,7 +53,8 @@ export class TripDataService {
     let formData = {
       name: user.name,
       email: user.email,
-      password: passwd
+      password: passwd,
+      role: user.role,
     };
 
     return this.http.post<AuthResponse>(this.baseUrl + '/' + endpoint, formData);

@@ -22,15 +22,30 @@ export class TripCardComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  public isLoggedIn() 
+  // This function returns the determined user's state if they are signed in as an authenticated
+  // guest
+  public isGuestLoggedIn() 
   { 
-    return this.authenticationService.isLoggedIn(); 
+    return this.authenticationService.isGuestLoggedIn(); 
+  }
+
+  // This function returns the determined user's state if they are signed in as an authenticated
+  // admin
+  public isAdminLoggedIn() 
+  { 
+    return this.authenticationService.isAdminLoggedIn(); 
   }
 
   public editTrip(trip: Trip) {
     localStorage.removeItem('tripCode');
     localStorage.setItem('tripCode', trip.code);
     this.router.navigate(['edit-trip']);
+  }
+
+  public bookTrip(trip: Trip) {
+    localStorage.removeItem('tripCode');
+    localStorage.setItem('tripCode', trip.code);
+    this.router.navigate(['book-trip']);
   }
 
 }

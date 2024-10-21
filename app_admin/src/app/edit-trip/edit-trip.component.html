@@ -81,6 +81,26 @@
                 </div>
             </div>
         </div>
+        <div class="form-group">
+            <label>Current Availability:</label>
+            <input type="number" formControlName="current_availability" placeholder="Current Availability" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['current_availability'].errors }">
+            <div *ngIf="submitted && f['current_availability'].errors">
+                <div *ngIf="f['current_availability'].errors?.['required']">
+                    Current Availability is required
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Maximum Availability:</label>
+            <input type="number" formControlName="max_availability" placeholder="Maximum Availability" class="form-control"
+                [ngClass]="{ 'is-invalid': submitted && f['max_availability'].errors }">
+            <div *ngIf="submitted && f['max_availability'].errors">
+                <div *ngIf="f['max_availability'].errors?.['required']">
+                    Maximum Availability is required
+                </div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-info">Save</button>
     </form>
 </div>

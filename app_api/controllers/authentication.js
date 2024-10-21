@@ -4,7 +4,7 @@ const User = require('../models/users');
 
 const register = async (req, res) => {
     // Validate message to insure that all parameters are present
-    if (!req.body.name || !req.body.email || !req.body.password) {
+    if (!req.body.name || !req.body.email || !req.body.password || !req.body.role) {
         return res
             .status(400)
             .json({ "message": "All fields required" });
@@ -14,7 +14,8 @@ const register = async (req, res) => {
         {
             name: req.body.name,    // Set User name
             email: req.body.email,  // Set email address
-            password: ''            // Start with empty password
+            password: '',            // Start with empty password
+            role: req.body.role,
         });
     user.setPassword(req.body.password) // Set user password
     const q = await user.save();

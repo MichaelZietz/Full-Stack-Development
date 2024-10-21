@@ -57,13 +57,39 @@ export class AuthenticationService {
     }
   }
 
+   // Boolean to determine if we are logged in and the token is   
+  // still valid. Even if we have a token we will still have to    
+  // reauthenticate if the token has expired   
+  public isGuestLoggedIn(): boolean {
+    const token: string = this.getToken();
+    if (token && this.getCurrentUser().role == "guest") {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp > (Date.now() / 1000);
+    } else {
+      return false;
+    }
+  }
+
+   // Boolean to determine if we are logged in and the token is   
+  // still valid. Even if we have a token we will still have to    
+  // reauthenticate if the token has expired   
+  public isAdminLoggedIn(): boolean {
+    const token: string = this.getToken();
+    if (token && this.getCurrentUser().role == "admin") {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      return payload.exp > (Date.now() / 1000);
+    } else {
+      return false;
+    }
+  }
+
   // Retrieve the current user. This function should only be called    
   // after the calling method has checked to make sure that the user   
   // isLoggedIn.    
   public getCurrentUser(): User {
     const token: string = this.getToken();
-    const { email, name } = JSON.parse(atob(token.split('.')[1]));
-    return { email, name } as User;
+    const { email, name, role } = JSON.parse(atob(token.split('.')[1]));
+    return { email, name, role } as User;
   }
 
   // Login method that leverages the login method in tripDataService   
@@ -76,13 +102,13 @@ export class AuthenticationService {
       .subscribe({
         next: (value: any) => {
           if (value) {
-            console.log(value);
+            //console.log(value);
             this.authResp = value;
             this.saveToken(this.authResp.token);
           }
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          //console.log('Error: ' + error);
         }
       })
   }
@@ -100,13 +126,13 @@ export class AuthenticationService {
       .subscribe({
         next: (value: any) => {
           if (value) {
-            console.log(value);
+            // console.log(value);
             this.authResp = value;
             this.saveToken(this.authResp.token);
           }
         },
         error: (error: any) => {
-          console.log('Error: ' + error);
+          // console.log('Error: ' + error);
         }
       })
   }

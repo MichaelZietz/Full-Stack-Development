@@ -18,7 +18,8 @@ export class LoginComponent {
   credentials = {
     name: '',
     email: '',
-    password: ''
+    password: '',
+    role: ''
   }
 
   constructor(
@@ -29,21 +30,23 @@ export class LoginComponent {
   ngOnInit(): void {
   }
 
+  // This function handles when the a user attemps to login. It verifies that requried variables are filled before performing the actual login
   public onLoginSubmit(): void {
     this.formError = '';
     if (!this.credentials.email || !this.credentials.password ||
       !this.credentials.name) {
       this.formError = 'All fields are required, please try again';
-      this.router.navigateByUrl('#'); // Return to login page     
+      this.router.navigateByUrl('/login'); // Return to login page     
     } else {
       this.doLogin();
     }
   }
 
+  // This funciton handles the login task process by authentication the login service and navigating to the home page
   private doLogin(): void {
     let newUser = {
       name: this.credentials.name,
-      email: this.credentials.email
+      email: this.credentials.email,
     } as User;
 
     // console.log('LoginComponent::doLogin');     

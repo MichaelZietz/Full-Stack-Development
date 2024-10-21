@@ -33,8 +33,8 @@ export class EditTripComponent implements OnInit {
       this.router.navigate(['']);
       return;
     }
-    console.log('EditTripComponent::ngOnInit');
-    console.log('tripcode:' + tripCode);
+    
+    // the edit form requires that all the following variables are present and needed to successfully edit an existing trip
     this.editForm = this.formBuilder.group({
       _id: [],
       code: [tripCode, Validators.required],
@@ -44,7 +44,9 @@ export class EditTripComponent implements OnInit {
       resort: ['', Validators.required],
       perPerson: ['', Validators.required],
       image: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      current_availability: [0, Validators.required],
+      max_availability: [0, Validators.required]
     })
     this.tripDataService.getTrip(tripCode)
       .subscribe({
@@ -65,6 +67,8 @@ export class EditTripComponent implements OnInit {
         }
       })
   }
+
+  // This function performs the update trip crUd POST and then navigates the user back to the main page
   public onSubmit() {
     this.submitted = true;
     if (this.editForm.valid) {

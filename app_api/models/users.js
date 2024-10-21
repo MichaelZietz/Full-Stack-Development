@@ -12,6 +12,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    role: {
+        type: String,
+        required: true
+    },
     hash: String,
     salt: String
 });
@@ -35,6 +39,7 @@ userSchema.methods.generateJWT = function () {
             _id: this._id,
             email: this.email,
             name: this.name,
+            role: this.role,
         },
         process.env.JWT_SECRET, //SECRET stored in .env file 
         { expiresIn: '1h' });   //Token expires an hour from creation 
